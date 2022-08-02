@@ -9,6 +9,15 @@ export const fetchPost = createAsyncThunk("post/fetchPost", async () => {
   return res.data;
 });
 
+export const addPost = createAsyncThunk("post/addPost", async (data) => {
+  const res = await axios({
+    method: "POST",
+    url: "http://localhost:5000/posts",
+    data: data,
+  });
+  return res.data;
+});
+
 export const postSlice = createSlice({
   name: "post",
   initialState: {
