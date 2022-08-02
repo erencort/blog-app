@@ -7,8 +7,8 @@ import postRouters from "./routes/post.js";
 const app = express();
 dotenv.config();
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
 app.use("/posts", postRouters);
 
