@@ -15,20 +15,20 @@ export const addPost = createAsyncThunk("post/addPost", async (data) => {
     url: "http://localhost:5000/posts",
     data,
   });
+  console.log(data);
   return res.data;
 });
 
-export const updatePost = createAsyncThunk(
-  "post/updatePost",
-  async (currentId, data) => {
-    const res = await axios({
-      method: "PATCH",
-      url: `http://localhost:5000/posts/${currentId}`,
-      data,
-    });
-    return res.data;
-  }
-);
+export const updatePost = createAsyncThunk("post/updatePost", async (args) => {
+  const { currentId } = args;
+  const { data } = args;
+  const res = await axios.patch(
+    `http://localhost:5000/posts/${currentId}`,
+    data
+  );
+  console.log(data);
+  return res.data;
+});
 
 export const postSlice = createSlice({
   name: "post",

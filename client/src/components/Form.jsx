@@ -2,9 +2,8 @@ import React from "react";
 import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import FileBase from "react-file-base64";
-import { addPost } from "../redux/postSlice";
+import { addPost, updatePost } from "../redux/postSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePost } from "../redux/postSlice";
 import { useEffect } from "react";
 
 function Form() {
@@ -23,6 +22,7 @@ function Form() {
 
   useEffect(() => {
     setData(post);
+    console.log(data);
   }, [post]);
 
   const clear = () => {
@@ -37,7 +37,8 @@ function Form() {
 
   const addPostHandle = () => {
     if (currentId) {
-      dispatch(updatePost(currentId, data));
+      dispatch(updatePost({ currentId, data }));
+      console.log(data);
     } else {
       dispatch(addPost(data));
     }
