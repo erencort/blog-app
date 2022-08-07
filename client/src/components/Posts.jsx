@@ -20,6 +20,7 @@ function Posts() {
             <Grid xs={4}>
               <PostCard
                 key={item._id}
+                id={item._id}
                 createdAt={item.createdAt}
                 likeCount={item.likeCount}
                 section={item.section}

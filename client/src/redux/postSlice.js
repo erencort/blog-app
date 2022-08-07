@@ -13,10 +13,22 @@ export const addPost = createAsyncThunk("post/addPost", async (data) => {
   const res = await axios({
     method: "POST",
     url: "http://localhost:5000/posts",
-    data: data,
+    data,
   });
   return res.data;
 });
+
+export const updatePost = createAsyncThunk(
+  "post/updatePost",
+  async (currentId, data) => {
+    const res = await axios({
+      method: "PATCH",
+      url: `http://localhost:5000/posts/${currentId}`,
+      data,
+    });
+    return res.data;
+  }
+);
 
 export const postSlice = createSlice({
   name: "post",
@@ -24,8 +36,13 @@ export const postSlice = createSlice({
     status: "",
     items: [],
     error: null,
+    currentId: null,
   },
-  reducers: {},
+  reducers: {
+    setCurrentId: (state, action) => {
+      state.currentId = action.payload;
+    },
+  },
   extraReducers: {
     [fetchPost.pending]: (state, action) => {
       state.status = "loading";
@@ -41,3 +58,4 @@ export const postSlice = createSlice({
 });
 
 export default postSlice.reducer;
+export const { setCurrentId } = postSlice.actions;

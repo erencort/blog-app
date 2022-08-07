@@ -3,10 +3,16 @@ import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import FileBase from "react-file-base64";
 import { addPost } from "../redux/postSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePost } from "../redux/postSlice";
+import { useEffect } from "react";
 
 function Form() {
   const dispatch = useDispatch();
+  const currentId = useSelector((state) => state.post.currentId);
+  const post = useSelector((state) =>
+    currentId ? state.post.items.find((post) => post._id === currentId) : null
+  );
   const [data, setData] = useState({
     creator: "",
     title: "",
@@ -14,6 +20,10 @@ function Form() {
     tags: "",
     selectedFile: "",
   });
+
+  useEffect(() => {
+    setData(post);
+  }, [post]);
 
   const clear = () => {
     setData({
@@ -26,17 +36,21 @@ function Form() {
   };
 
   const addPostHandle = () => {
-    dispatch(addPost(data));
+    if (currentId) {
+      dispatch(updatePost(currentId, data));
+    } else {
+      dispatch(addPost(data));
+    }
   };
 
   return (
-    <div>
+    <div className="post-form">
       <TextField
         name="creator"
         variant="outlined"
         label="Creator"
         fullWidth
-        value={data.creator}
+        value={data?.creator}
         onChange={(e) => setData({ ...data, creator: e.target.value })}
       />
       <TextField
@@ -44,7 +58,7 @@ function Form() {
         variant="outlined"
         label="Title"
         fullWidth
-        value={data.title}
+        value={data?.title}
         onChange={(e) => setData({ ...data, title: e.target.value })}
       />
       <TextField
@@ -52,7 +66,7 @@ function Form() {
         variant="outlined"
         label="message"
         fullWidth
-        value={data.message}
+        value={data?.message}
         onChange={(e) => setData({ ...data, message: e.target.value })}
       />
       <TextField
@@ -60,7 +74,7 @@ function Form() {
         variant="outlined"
         label="Tags"
         fullWidth
-        value={data.tags}
+        value={data?.tags}
         onChange={(e) => setData({ ...data, tags: e.target.value })}
       />
       <FileBase

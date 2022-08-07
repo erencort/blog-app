@@ -5,8 +5,24 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { setCurrentId } from "../redux/postSlice";
+import { useEffect } from "react";
 
-const PostCard = ({ createdAt, likeCount, section, subTitle, tags, title }) => {
+const PostCard = ({
+  createdAt,
+  likeCount,
+  section,
+  subTitle,
+  tags,
+  title,
+  id,
+}) => {
+  const dispatch = useDispatch();
+  const setCurrentIdHandle = () => {
+    dispatch(setCurrentId(id));
+  };
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -32,6 +48,9 @@ const PostCard = ({ createdAt, likeCount, section, subTitle, tags, title }) => {
         </Typography>
         <span>{likeCount}</span>
         <Button size="small">Like</Button>
+        <Button onClick={setCurrentIdHandle} size="small">
+          Edit
+        </Button>
         <span>{createdAt}</span>
       </CardActions>
     </Card>

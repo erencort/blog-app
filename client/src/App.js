@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import "./App.css";
 import Form from "./components/Form";
 import Posts from "./components/Posts";
 
