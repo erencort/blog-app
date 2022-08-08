@@ -44,12 +44,11 @@ function Form() {
   const addPostHandle = async () => {
     if (currentId) {
       await dispatch(updatePost({ currentId, data }));
-      console.log(data);
     } else {
       await dispatch(addPost(data));
     }
-    clear();
     dispatch(fetchPost());
+    clear();
   };
 
   return (
@@ -92,6 +91,7 @@ function Form() {
       <FileBase
         type="file"
         multiple={false}
+        value={data?.selectedFile}
         onDone={({ base64 }) => setData({ ...data, selectedFile: base64 })}
       />
       <Button onClick={addPostHandle} variant="contained">

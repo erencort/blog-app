@@ -27,6 +27,7 @@ function Posts() {
                 subTitle={item.subTitle}
                 tags={item.tags}
                 title={item.title}
+                img={item.selectedFile}
               />
             </Grid>
           ))}

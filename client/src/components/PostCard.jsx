@@ -23,6 +23,7 @@ const PostCard = ({
   tags,
   title,
   id,
+  img,
 }) => {
   const dispatch = useDispatch();
   const setCurrentIdHandle = () => {
@@ -43,12 +44,7 @@ const PostCard = ({
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image="https://picsum.photos/350/150"
-        alt="green iguana"
-      />
+      <CardMedia component="img" height="140" image={img} alt="green iguana" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
