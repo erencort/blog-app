@@ -1,8 +1,13 @@
 import React from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography } from "@mui/material";
 import { useState } from "react";
 import FileBase from "react-file-base64";
-import { addPost, updatePost } from "../redux/postSlice";
+import {
+  addPost,
+  fetchPost,
+  setCurrentId,
+  updatePost,
+} from "../redux/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -33,19 +38,25 @@ function Form() {
       tags: "",
       selectedFile: "",
     });
+    dispatch(setCurrentId(null));
   };
 
-  const addPostHandle = () => {
+  const addPostHandle = async () => {
     if (currentId) {
-      dispatch(updatePost({ currentId, data }));
+      await dispatch(updatePost({ currentId, data }));
       console.log(data);
     } else {
-      dispatch(addPost(data));
+      await dispatch(addPost(data));
     }
+    clear();
+    dispatch(fetchPost());
   };
 
   return (
     <div className="post-form">
+      <Typography gutterBottom variant="h4" component="div">
+        {`${currentId ? "Edit" : "Create a"} post`}
+      </Typography>
       <TextField
         name="creator"
         variant="outlined"

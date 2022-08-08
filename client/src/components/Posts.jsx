@@ -7,10 +7,10 @@ import PostCard from "./PostCard";
 function Posts() {
   const posts = useSelector((state) => state.post.items);
   const status = useSelector((state) => state.post.status);
+  const currentId = useSelector((state) => state.post.currentId);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPost());
-    console.log(status);
   }, [dispatch]);
   return (
     <div>

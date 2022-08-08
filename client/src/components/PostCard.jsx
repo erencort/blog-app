@@ -5,9 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
-import { setCurrentId } from "../redux/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePost, fetchPost, setCurrentId } from "../redux/postSlice";
 import { useEffect } from "react";
+import moment from "moment";
 
 const PostCard = ({
   createdAt,
@@ -21,6 +22,12 @@ const PostCard = ({
   const dispatch = useDispatch();
   const setCurrentIdHandle = () => {
     dispatch(setCurrentId(id));
+  };
+
+  const deleteHandler = async () => {
+    await dispatch(deletePost(id));
+    // updating posts
+    dispatch(fetchPost());
   };
 
   return (
@@ -51,7 +58,10 @@ const PostCard = ({
         <Button onClick={setCurrentIdHandle} size="small">
           Edit
         </Button>
-        <span>{createdAt}</span>
+        <Button onClick={deleteHandler} size="small">
+          Delete
+        </Button>
+        <span>{moment(createdAt).fromNow()}</span>
       </CardActions>
     </Card>
   );
