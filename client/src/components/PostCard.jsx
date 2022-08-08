@@ -6,7 +6,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, fetchPost, setCurrentId } from "../redux/postSlice";
+import {
+  deletePost,
+  fetchPost,
+  likePost,
+  setCurrentId,
+} from "../redux/postSlice";
 import { useEffect } from "react";
 import moment from "moment";
 
@@ -27,6 +32,12 @@ const PostCard = ({
   const deleteHandler = async () => {
     await dispatch(deletePost(id));
     // updating posts
+    dispatch(fetchPost());
+  };
+
+  const likeHandler = async () => {
+    await dispatch(likePost(id));
+
     dispatch(fetchPost());
   };
 
@@ -54,7 +65,9 @@ const PostCard = ({
           {tags && tags.map((item) => <span>{item}</span>)}
         </Typography>
         <span>{likeCount}</span>
-        <Button size="small">Like</Button>
+        <Button onClick={likeHandler} size="small">
+          Like
+        </Button>
         <Button onClick={setCurrentIdHandle} size="small">
           Edit
         </Button>
