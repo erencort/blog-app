@@ -14,16 +14,16 @@ function Posts() {
   }, [dispatch]);
   return (
     <div>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         {posts &&
           posts.map((item) => (
-            <Grid xs={4}>
+            <Grid xs={5} item sx={{ margin: "auto" }}>
               <PostCard
                 key={item._id}
                 id={item._id}
                 createdAt={item.createdAt}
                 likeCount={item.likeCount}
-                section={item.section}
+                message={item.message}
                 subTitle={item.subTitle}
                 tags={item.tags}
                 title={item.title}

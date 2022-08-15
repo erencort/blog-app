@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Button, Typography } from "@mui/material";
+import { TextField, Button, Typography, Box } from "@mui/material";
 import { useState } from "react";
 import FileBase from "react-file-base64";
 import {
@@ -52,8 +52,8 @@ function Form() {
   };
 
   return (
-    <div className="post-form">
-      <Typography gutterBottom variant="h4" component="div">
+    <Box className="post-form" sx={{ margin: 5 }}>
+      <Typography gutterBottom variant="h4" component="Box">
         {`${currentId ? "Edit" : "Create a"} post`}
       </Typography>
       <TextField
@@ -100,7 +100,7 @@ function Form() {
       <Button onClick={clear} variant="contained">
         Clear
       </Button>
-    </div>
+    </Box>
   );
 }
 
