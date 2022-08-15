@@ -1,11 +1,13 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import Form from "./components/Form";
+import Header from "./components/Header";
 import Posts from "./components/Posts";
 
 function App() {
   return (
     <Container maxWidth="xl">
+      <Header />
       <Grid
         container
         justifyContent="space-between"
