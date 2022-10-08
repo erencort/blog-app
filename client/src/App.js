@@ -1,26 +1,19 @@
-import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import Form from "./components/Form";
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Posts from "./components/Posts";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
     <Container maxWidth="xl">
       <Header />
-      <Grid
-        container
-        justifyContent="space-between"
-        alignItems="stretch"
-        spacing={2}
-      >
-        <Grid item xs={12} sm={7}>
-          <Posts />
-        </Grid>
-        <Grid xs={12} sm={4}>
-          <Form />
-        </Grid>
-      </Grid>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </Container>
   );
 }
